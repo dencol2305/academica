@@ -7,9 +7,11 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 const PORT = 5000; 
+
 
 // 2. MIDDLEWARES
 app.use(cors());          
@@ -17,10 +19,10 @@ app.use(express.json());
 
 // 3. CONEXIÓN A LA BASE DE DATOS 'ACADEMICA'
 const db = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',       
-    password: 'adso123',       
-    database: 'academica'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,       
+    password: process.env.DB_PASSWORD,       
+    database: process.env.DB_NAME
 });
 
 db.connect((error) => {
